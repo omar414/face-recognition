@@ -1,5 +1,4 @@
 import React from "react";
-
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -29,11 +28,11 @@ class Register extends React.Component {
       }),
     })
       .then((response) => response.json())
-      .then((user) => {
-        if (user){
+      .then(user => {
+        if (user.id){
             this.props.loadUser(user)
             this.props.onRouteChange("home");  
-        } 
+        }
       });
   };
   render() {
@@ -53,6 +52,7 @@ class Register extends React.Component {
                   name="name"
                   id="name"
                   onChange={this.onNameChange}
+                  
                 />
               </div>
               <div className="mt3">

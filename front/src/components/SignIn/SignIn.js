@@ -10,24 +10,30 @@ class SignIn extends React.Component {
   }
   onEmailChange = (event) => {
     this.setState({ signInEmail: event.target.value });
+    
   };
   onPasswordChange = (event) => {
     this.setState({ signInPassword: event.target.value });
   };
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin',{
-        method:'post',
-        headers:{'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            email:this.state.signInEmail,
-            password: this.state.signInPassword
-        })
-    }).then(response => response.json()).then(user => {
-        if (user.id)
-        this.props.loadUser(user)
-        this.props.onRouteChange("home");
+    fetch("http://localhost:3000/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword,
+      }),
     })
+      .then((response) => response.json())
+      .then(data => {
+        if (data.id) {
+          this.props.loadUser(data)
+          this.props.onRouteChange("home");
+        }else{
+         this.props.onRouteChange('onError')
+        }
+      });
   };
   render() {
     return (
@@ -57,7 +63,8 @@ class SignIn extends React.Component {
                   type="password"
                   name="password"
                   id="password"
-                  onChange={this.onPasswordChange}/>
+                  onChange={this.onPasswordChange}
+                />
               </div>
             </fieldset>
             <div className="">
