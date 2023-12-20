@@ -9,15 +9,15 @@ const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 
-const db = knex({
-  client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    user: "postgres",
-    password: "2313358",
-    database: "face-recognition",
-  },
-});
+// const db = knex({
+//   client: "pg",
+//   connection: {
+//     host: "127.0.0.1",
+//     user: "postgres",
+//     password: "2313358",
+//     database: "face-recognition",
+//   },
+// });
 
 db.select("*")
   .from("users")
@@ -32,7 +32,7 @@ app.use(cors());
 
 
 app.get("/", (req, res) => {
-  res.send(database.users);
+  res.send("it is working!");
 });
 
 app.post("/signin",signin.handleSignin(db, bcrypt));
@@ -52,5 +52,5 @@ app.post("/imageurl", (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("app is running on port 3000");
+  console.log(`app is running on port 3000 ${process.env.PORT}`);
 });
