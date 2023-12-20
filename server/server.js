@@ -9,21 +9,21 @@ const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 
-// const db = knex({
-//   client: "pg",
-//   connection: {
-//     host: "127.0.0.1",
-//     user: "postgres",
-//     password: "2313358",
-//     database: "face-recognition",
-//   },
-// });
+const db = knex({
+  client: "pg",
+  connection: {
+    host: "127.0.0.1",
+    user: "postgres",
+    password: "",
+    database: "face-recognition",
+  },
+});
 
-db.select("*")
-  .from("users")
-  .then((data) => {
-    console.log(data);
-  });
+// db.select("*")
+//   .from("users")
+//   .then((data) => {
+//     console.log(data);
+//   });
 const app = express();
 
 app.use(bodyParser.json());
